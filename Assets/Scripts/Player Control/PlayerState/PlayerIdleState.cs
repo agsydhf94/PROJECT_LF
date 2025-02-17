@@ -24,10 +24,16 @@ namespace LF
         {
             base.Update();
 
+            // 플레이어가 벽에 부딪힌 상태에서 벽쪽으로 걷는 모션이 재생되는 것을 방지
+            if (xInput == player.facingDirection && player.IsWallDetected())
+                return;
+
             if (xInput != 0)
             {
                 stateMachine.ChangeState(player.moveState);
             }
+
+            
         }
     }
 }

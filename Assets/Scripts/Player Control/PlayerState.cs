@@ -13,6 +13,7 @@ namespace LF
         protected Rigidbody2D rb;
 
         protected float xInput;
+        protected float yInput;
 
         protected float stateTimer;
 
@@ -37,6 +38,7 @@ namespace LF
             stateTimer -= Time.deltaTime;
 
             xInput = Input.GetAxisRaw("Horizontal");
+            yInput = Input.GetAxisRaw("Vertical");
             player.anim.SetFloat("yVelocity", rb.velocity.y);
         }
 

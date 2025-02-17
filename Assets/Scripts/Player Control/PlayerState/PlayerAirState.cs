@@ -29,5 +29,16 @@ public class PlayerAirState : PlayerState
         {
             stateMachine.ChangeState(player.idleState);
         }
+
+        // 캐릭터가 공중에서 떨어질 때도 방향을 바꿀 수 있게 함
+        if(xInput != 0)
+        {
+            player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
+        }
+
+        if(player.IsWallDetected())
+        {
+            stateMachine.ChangeState(player.wallSlideState);
+        }
     }
 }

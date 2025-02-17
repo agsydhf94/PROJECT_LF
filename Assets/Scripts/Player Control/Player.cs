@@ -42,6 +42,7 @@ namespace LF
         public PlayerMoveState moveState { get; private set; }
         public PlayerJumpState jumpState { get; private set; }
         public PlayerAirState airState { get; private set; }
+        public PlayerWallSlideState wallSlideState { get; private set; }
         public PlayerDashState dashState { get; private set; }
 
         #endregion
@@ -54,6 +55,7 @@ namespace LF
             moveState = new PlayerMoveState(this, stateMachine, "Move");
             jumpState = new PlayerJumpState(this, stateMachine, "Jump");
             airState = new PlayerAirState(this, stateMachine, "Jump");
+            wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
             dashState = new PlayerDashState(this, stateMachine, "Dash");
         }
 
@@ -80,6 +82,7 @@ namespace LF
         }
 
         public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+        public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, groundLayer); 
 
         public void Flip()
         {
