@@ -23,7 +23,9 @@ public class PlayerAirState : PlayerState
     {
         base.Update();
 
-        if(rb.velocity.y == 0)
+        // if 안에 조건을 rb.velocity.y == 0 으로 안한 이유는 
+        // 속도를 기준으로하면 예를 들어 적의 머리에서 점프를 하는 등 부자연스러운 모습이 연출됨
+        if(player.IsGroundDetected())
         {
             stateMachine.ChangeState(player.idleState);
         }
