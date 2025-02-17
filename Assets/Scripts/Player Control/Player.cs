@@ -63,6 +63,9 @@ namespace LF
         private void Update()
         {
             stateMachine.currentState.Update();
+
+            // 땅에 있을 때 뿐아니라 공중에서도 대시 가능
+            CheckForDashInput();
         }
 
         public void SetVelocity(float _xVel, float _yVel)
@@ -90,6 +93,14 @@ namespace LF
             else if(_xInput < 0 && isFacingRight)
             {
                 Flip();
+            }
+        }
+
+        public void CheckForDashInput()
+        {
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                stateMachine.ChangeState(dashState);
             }
         }
 
