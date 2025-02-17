@@ -10,6 +10,10 @@ namespace LF
         protected PlayerStateMachine stateMachine;
         private string animBoolName;
 
+        protected Rigidbody2D rb;
+
+        protected float xInput;
+
         // 캐릭터 상태 생성자
         public PlayerState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
         {
@@ -23,11 +27,12 @@ namespace LF
         public virtual void Enter()
         {
             player.anim.SetBool(animBoolName, true);
+            rb = player.rb;
         }
 
         public virtual void Update()
         {
-
+            xInput = Input.GetAxisRaw("Horizontal");
         }
 
         public virtual void Exit()

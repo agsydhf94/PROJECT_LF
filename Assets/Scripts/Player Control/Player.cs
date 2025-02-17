@@ -6,9 +6,13 @@ namespace LF
 {
     public class Player : MonoBehaviour
     {
+        [Header("Move Information")]
+        public float moveSpeed = 12f;
+
         #region Components
 
         public Animator anim { get; private set; }
+        public Rigidbody2D rb { get; private set; }
 
         #endregion
 
@@ -32,6 +36,7 @@ namespace LF
         private void Start()
         {
             anim = GetComponentInChildren<Animator>();
+            rb = GetComponent<Rigidbody2D>();
 
             stateMachine.Initialize(idleState);
         }
@@ -39,6 +44,11 @@ namespace LF
         private void Update()
         {
             stateMachine.currentState.Update();
+        }
+
+        public void SetVelocity(float _xVel, float _yVel)
+        {
+            rb.velocity = new Vector2(_xVel, _yVel);
         }
     }
 }
