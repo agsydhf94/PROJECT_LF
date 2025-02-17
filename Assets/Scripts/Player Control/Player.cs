@@ -17,6 +17,9 @@ namespace LF
         [SerializeField] private float wallCheckDistance;
         [SerializeField] private LayerMask groundLayer;
 
+        public int facingDirection { get; private set; } = 1;
+        private bool isFacingRight = true;
+
         #region Components
 
         public Animator anim { get; private set; }
@@ -61,9 +64,30 @@ namespace LF
         public void SetVelocity(float _xVel, float _yVel)
         {
             rb.velocity = new Vector2(_xVel, _yVel);
+            FilpControl(_xVel);
         }
 
         public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+
+        public void Flip()
+        {
+            facingDirection *= -1;
+            isFacingRight = !isFacingRight;
+            transform.Rotate(0, 180, 0);
+        }
+
+
+        public void FilpControl(float _xInput)
+        {
+            if(_xInput > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+            else if(_xInput < 0 && isFacingRight)
+            {
+                Flip();
+            }
+        }
 
         private void OnDrawGizmos()
         {
