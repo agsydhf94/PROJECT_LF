@@ -14,6 +14,8 @@ namespace LF
 
         protected float xInput;
 
+        protected float stateTimer;
+
         // 캐릭터 상태 생성자
         public PlayerState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
         {
@@ -32,6 +34,8 @@ namespace LF
 
         public virtual void Update()
         {
+            stateTimer -= Time.deltaTime;
+
             xInput = Input.GetAxisRaw("Horizontal");
             player.anim.SetFloat("yVelocity", rb.velocity.y);
         }

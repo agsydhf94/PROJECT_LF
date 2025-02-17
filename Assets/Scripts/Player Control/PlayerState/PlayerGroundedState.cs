@@ -28,6 +28,11 @@ namespace LF
             {
                 stateMachine.ChangeState(player.jumpState);
             }
+
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                stateMachine.ChangeState(player.dashState);
+            }
         }
     }
 }
