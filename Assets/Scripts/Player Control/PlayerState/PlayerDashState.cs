@@ -30,7 +30,9 @@ namespace LF
             base.Update();
 
             // 플레이어가 향하고 있던 방향으로 dashSpeed의 속도로 대시
-            player.SetVelocity(player.dashSpeed * player.facingDirection, rb.velocity.y);
+            // 방향은 facingDirection이 아닌 dashDirection으로 통제
+            // y 방향 velocity를 0으로 해서 공중 대시 중에 낙하하는 것을 방지
+            player.SetVelocity(player.dashSpeed * player.dashDirection, 0);
 
             if(stateTimer < 0)
             {
