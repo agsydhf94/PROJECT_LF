@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace LF
 {
-    public class PlayerMoveState : PlayerGroundedState
+    public class PlayerGroundedState : PlayerState
     {
-        public PlayerMoveState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+        public PlayerGroundedState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
         {
         }
 
@@ -24,11 +24,9 @@ namespace LF
         {
             base.Update();
 
-            player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
-
-            if (xInput == 0)
+            if(Input.GetKeyDown(KeyCode.Space))
             {
-                stateMachine.ChangeState(player.idleState);
+                stateMachine.ChangeState(player.jumpState);
             }
         }
     }

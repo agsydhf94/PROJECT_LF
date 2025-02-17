@@ -4,15 +4,17 @@ using UnityEngine;
 
 namespace LF
 {
-    public class PlayerMoveState : PlayerGroundedState
+    public class PlayerJumpState : PlayerState
     {
-        public PlayerMoveState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+        public PlayerJumpState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
         {
         }
 
         public override void Enter()
         {
             base.Enter();
+
+            rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
         }
 
         public override void Exit()
@@ -23,12 +25,10 @@ namespace LF
         public override void Update()
         {
             base.Update();
-
-            player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
-
-            if (xInput == 0)
+            
+            if(rb.velocity.y < 0)
             {
-                stateMachine.ChangeState(player.idleState);
+                stateMachine.ChangeState(player.airState);
             }
         }
     }
