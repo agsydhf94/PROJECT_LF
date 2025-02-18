@@ -16,6 +16,7 @@ namespace LF
         protected float yInput;
 
         protected float stateTimer;
+        protected bool triggerCalled;
 
         // 캐릭터 상태 생성자
         public PlayerState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
@@ -31,6 +32,7 @@ namespace LF
         {
             player.anim.SetBool(animBoolName, true);
             rb = player.rb;
+            triggerCalled = false;
         }
 
         public virtual void Update()
@@ -45,6 +47,11 @@ namespace LF
         public virtual void Exit()
         {
             player.anim.SetBool(animBoolName, false);
+        }
+
+        public virtual void AnimationFinishTrigger()
+        {
+            triggerCalled = true;
         }
     }
 }

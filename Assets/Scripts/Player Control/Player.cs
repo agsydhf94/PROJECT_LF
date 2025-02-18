@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
 namespace LF
 {
@@ -45,6 +46,7 @@ namespace LF
         public PlayerWallSlideState wallSlideState { get; private set; }
         public PlayerWallJumpState wallJumpState { get; private set; }
         public PlayerDashState dashState { get; private set; }
+        public PlayerPrimaryAttackState primaryAttackState { get; private set; }
 
         #endregion
 
@@ -59,6 +61,7 @@ namespace LF
             wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
             wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
             dashState = new PlayerDashState(this, stateMachine, "Dash");
+            primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
         }
 
         private void Start()
@@ -126,6 +129,8 @@ namespace LF
                 stateMachine.ChangeState(dashState);
             }
         }
+
+        public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
         private void OnDrawGizmos()
         {
