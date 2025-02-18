@@ -24,6 +24,13 @@ namespace LF
         {
             base.Update();
 
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                stateMachine.ChangeState(player.wallJumpState);
+                return;
+                // 이후의 물리상황에 의해 영향 받는것을 억제
+            }
+
 
             if(yInput < 0)
             {

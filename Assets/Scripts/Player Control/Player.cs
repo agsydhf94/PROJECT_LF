@@ -43,6 +43,7 @@ namespace LF
         public PlayerJumpState jumpState { get; private set; }
         public PlayerAirState airState { get; private set; }
         public PlayerWallSlideState wallSlideState { get; private set; }
+        public PlayerWallJumpState wallJumpState { get; private set; }
         public PlayerDashState dashState { get; private set; }
 
         #endregion
@@ -56,6 +57,7 @@ namespace LF
             jumpState = new PlayerJumpState(this, stateMachine, "Jump");
             airState = new PlayerAirState(this, stateMachine, "Jump");
             wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
+            wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
             dashState = new PlayerDashState(this, stateMachine, "Dash");
         }
 
@@ -106,6 +108,10 @@ namespace LF
 
         public void CheckForDashInput()
         {
+            // 벽타기 도중에는 대시 불가
+            if(IsWallDetected()) 
+                return;
+
             dashUsedTimer -= Time.deltaTime;
 
             if(Input.GetKeyDown(KeyCode.LeftShift) && dashUsedTimer < 0)

@@ -29,6 +29,12 @@ namespace LF
         {
             base.Update();
 
+            // 공중 대시 중 벽에 부딪히면 벽타기 상태로 전환 
+            if(!player.IsGroundDetected() && player.IsWallDetected())
+            {
+                stateMachine.ChangeState(player.wallSlideState);
+            }
+
             // 플레이어가 향하고 있던 방향으로 dashSpeed의 속도로 대시
             // 방향은 facingDirection이 아닌 dashDirection으로 통제
             // y 방향 velocity를 0으로 해서 공중 대시 중에 낙하하는 것을 방지

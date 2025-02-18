@@ -4,15 +4,18 @@ using UnityEngine;
 
 namespace LF
 {
-    public class PlayerMoveState : PlayerGroundedState
+    public class PlayerWallJumpState : PlayerState
     {
-        public PlayerMoveState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+        public PlayerWallJumpState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
         {
         }
 
         public override void Enter()
         {
             base.Enter();
+
+            stateTimer = 0.4f;
+            player.SetVelocity(5 * -player.facingDirection, player.jumpForce);
         }
 
         public override void Exit()
@@ -24,15 +27,12 @@ namespace LF
         {
             base.Update();
 
-            // 달리다가 벽에 부딫히면 idle 상태로 전환
-            if(player.IsWallDetected())
+            if(stateTimer < 0)
             {
-                stateMachine.ChangeState(player.idleState);
+                stateMachine.ChangeState(player.airState);
             }
 
-            player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
-
-            if (xInput == 0)
+            if(player.IsGroundDetected())
             {
                 stateMachine.ChangeState(player.idleState);
             }
