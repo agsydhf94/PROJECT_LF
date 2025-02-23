@@ -7,6 +7,8 @@ namespace LF
 {
     public class Player : MonoBehaviour
     {
+        public bool isBusy { get; private set; }
+
         [Header("Move Information")]
         public float moveSpeed = 12f;
         public float jumpForce;
@@ -128,6 +130,15 @@ namespace LF
 
                 stateMachine.ChangeState(dashState);
             }
+        }
+
+        public IEnumerator BusyFor(float _seconds)
+        {
+            isBusy = true;
+
+            yield return new WaitForSeconds(_seconds);
+
+            isBusy = false;
         }
 
         public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();

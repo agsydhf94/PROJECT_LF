@@ -37,6 +37,8 @@ namespace LF
         {
             base.Exit();
 
+            player.StartCoroutine("BusyFor", 0.15f);
+
             comboCounter++;
             lastTimeAttacked = Time.time;
         }
