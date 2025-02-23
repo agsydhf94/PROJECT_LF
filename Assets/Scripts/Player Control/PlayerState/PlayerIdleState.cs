@@ -15,7 +15,7 @@ namespace LF
             base.Enter();
 
             // 이 부분이 있어야 착지 후 계속 미끄러지는 것을 방지할 수 있음
-            rb.velocity = new Vector2(0, 0);
+            player.ZeroVelocity();
         }
 
         public override void Exit()

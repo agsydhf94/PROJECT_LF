@@ -51,7 +51,7 @@ namespace LF
 
             if(stateTimer < 0)
             {
-                rb.velocity = new Vector2(0, 0);
+                player.ZeroVelocity();
             }
 
             if(triggerCalled)

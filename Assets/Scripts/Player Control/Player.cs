@@ -84,15 +84,30 @@ namespace LF
             CheckForDashInput();
         }
 
+        #region Velocity
         public void SetVelocity(float _xVel, float _yVel)
         {
             rb.velocity = new Vector2(_xVel, _yVel);
             FilpControl(_xVel);
         }
 
-        public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
-        public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, groundLayer); 
 
+        public void ZeroVelocity() => rb.velocity = Vector2.zero;
+        #endregion
+
+        #region Collision
+        public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+        public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, groundLayer);
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
+            Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
+        }
+
+        #endregion
+
+        #region Flip
         public void Flip()
         {
             facingDirection *= -1;
@@ -112,6 +127,7 @@ namespace LF
                 Flip();
             }
         }
+        #endregion
 
         public void CheckForDashInput()
         {
@@ -145,10 +161,6 @@ namespace LF
 
         public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
-            Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
-        }
+        
     }
 }
