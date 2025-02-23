@@ -7,8 +7,10 @@ namespace LF
 {
     public class Player : MonoBehaviour
     {
-        public bool isBusy { get; private set; }
+        [Header("Attack Details")]
+        public Vector2[] attackMovement;
 
+        public bool isBusy { get; private set; }
         [Header("Move Information")]
         public float moveSpeed = 12f;
         public float jumpForce;

@@ -29,6 +29,8 @@ namespace LF
 
             player.anim.SetInteger("ComboCounter", comboCounter);
 
+            player.SetVelocity(player.attackMovement[comboCounter].x * player.facingDirection, player.attackMovement[comboCounter].y);
+
             // 공격이 시작되면 제자리에 서기까지 살짝 딜레이를 주어서 관성을 표현
             stateTimer = 0.1f;
         }
