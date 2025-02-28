@@ -4,21 +4,24 @@ using UnityEngine;
 
 namespace LF
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : Entity
     {
-        public Rigidbody rb { get; private set; }
-        public Animator anim { get; private set; }
+        [Header("Move Information")]
+        public float moveSpeed;
+        public float idleTime;
 
         public EnemyStateMachine stateMachine { get; private set; }
 
 
-        private void Awake()
+        protected override void Awake()
         {
             stateMachine = new EnemyStateMachine();
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
+
             stateMachine.currentState.Update();
         }
     }

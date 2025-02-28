@@ -7,15 +7,15 @@ namespace LF
     public class EnemyState
     {
         protected EnemyStateMachine stateMachine;
-        protected Enemy enemy;
+        protected Enemy enemyBase;
 
         private string animationBoolName;
         protected bool triggerCalled;
         protected float stateTimer;
 
-        public EnemyState(Enemy enemy, EnemyStateMachine stateMachine, string  animationBoolName)
+        public EnemyState(Enemy enemyBase, EnemyStateMachine stateMachine, string  animationBoolName)
         {
-            this.enemy = enemy;
+            this.enemyBase = enemyBase;
             this.stateMachine = stateMachine;
             this.animationBoolName = animationBoolName;
         }
@@ -23,7 +23,7 @@ namespace LF
         public virtual void Enter()
         {
             triggerCalled = false;
-            enemy.anim.SetBool(animationBoolName, true);
+            enemyBase.anim.SetBool(animationBoolName, true);
         }
 
         public virtual void Update()
@@ -33,7 +33,7 @@ namespace LF
 
         public virtual void Exit()
         {
-            enemy.anim.SetBool(animationBoolName, false);
+            enemyBase.anim.SetBool(animationBoolName, false);
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.Experimental.AI;
 
 namespace LF
 {
-    public class Player : MonoBehaviour
+    public class Player : Entity
     {
         [Header("Attack Details")]
         public Vector2[] attackMovement;
@@ -22,22 +22,11 @@ namespace LF
         [SerializeField] private float dashCoolDown;
         private float dashUsedTimer;
 
-        [Header("Collision Information")]
-        [SerializeField] private Transform groundCheck;
-        [SerializeField] private float groundCheckDistance;
-        [SerializeField] private Transform wallCheck;
-        [SerializeField] private float wallCheckDistance;
-        [SerializeField] private LayerMask groundLayer;
+        
 
-        public int facingDirection { get; private set; } = 1;
-        private bool isFacingRight = true;
+        
 
-        #region Components
-
-        public Animator anim { get; private set; }
-        public Rigidbody2D rb { get; private set; }
-
-        #endregion
+        
 
         
         #region States
@@ -54,7 +43,7 @@ namespace LF
 
         #endregion
 
-        private void Awake()
+        protected override void Awake()
         {
             stateMachine = new PlayerStateMachine();
 
@@ -68,66 +57,23 @@ namespace LF
             primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
         }
 
-        private void Start()
+        protected override void Start()
         {
-            anim = GetComponentInChildren<Animator>();
-            rb = GetComponent<Rigidbody2D>();
+            base.Start();
 
             stateMachine.Initialize(idleState);
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
             stateMachine.currentState.Update();
 
             // 땅에 있을 때 뿐아니라 공중에서도 대시 가능
             CheckForDashInput();
         }
 
-        #region Velocity
-        public void SetVelocity(float _xVel, float _yVel)
-        {
-            rb.velocity = new Vector2(_xVel, _yVel);
-            FilpControl(_xVel);
-        }
-
-
-        public void ZeroVelocity() => rb.velocity = Vector2.zero;
-        #endregion
-
-        #region Collision
-        public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
-        public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, groundLayer);
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
-            Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
-        }
-
-        #endregion
-
-        #region Flip
-        public void Flip()
-        {
-            facingDirection *= -1;
-            isFacingRight = !isFacingRight;
-            transform.Rotate(0, 180, 0);
-        }
-
-
-        public void FilpControl(float _xInput)
-        {
-            if(_xInput > 0 && !isFacingRight)
-            {
-                Flip();
-            }
-            else if(_xInput < 0 && isFacingRight)
-            {
-                Flip();
-            }
-        }
-        #endregion
+        
 
         public void CheckForDashInput()
         {
