@@ -37,5 +37,10 @@ namespace LF
         {
             enemyBase.anim.SetBool(animationBoolName, false);
         }
+
+        public virtual void AnimationFinishTrigger()
+        {
+            triggerCalled = true;
+        }
     }
 }

@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 58104670}
   - component: {fileID: 58104672}
   - component: {fileID: 58104671}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,13 +475,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 1060232063}
   groundCheckDistance: 0.4
-  wallCheck: {fileID: 313668241}
+  wallCheck: {fileID: 1211377590}
   wallCheckDistance: 0.8
   groundLayer:
     serializedVersion: 2
     m_Bits: 1048576
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 2097152
   moveSpeed: 1.5
   idleTime: 2
+  attackDistance: 0.88
 --- !u!4 &313668241
 Transform:
   m_ObjectHideFlags: 0
@@ -497,6 +501,7 @@ Transform:
   m_Children:
   - {fileID: 960080769}
   - {fileID: 1060232063}
+  - {fileID: 1211377590}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &368049791
@@ -1344,6 +1349,7 @@ GameObject:
   - component: {fileID: 960080769}
   - component: {fileID: 960080771}
   - component: {fileID: 960080770}
+  - component: {fileID: 960080772}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -1439,6 +1445,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &960080772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960080768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a76ca3e5346ef7459a4032a140df88d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,6 +1580,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 313668241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1211377589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1211377590}
+  m_Layer: 0
+  m_Name: WallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1211377590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211377589}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 313668241}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1213599377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,7 +1666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1414417372}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1757,7 +1806,7 @@ GameObject:
   - component: {fileID: 1472276277}
   - component: {fileID: 1472276276}
   - component: {fileID: 1472276278}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2003,7 +2052,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1736217124}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

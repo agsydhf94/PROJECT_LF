@@ -46,7 +46,7 @@ namespace LF
         }
 
 
-        public void ZeroVelocity() => rb.velocity = Vector2.zero;
+        public void SetZeroVelocity() => rb.velocity = Vector2.zero;
         #endregion
 
         #region Flip
