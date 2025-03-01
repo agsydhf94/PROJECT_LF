@@ -32,10 +32,18 @@ namespace LF
         {
             base.Update();
 
-            if(enemy.IsPlayerDetected().distance < enemy.attackDistance)
+            if (enemy.IsPlayerDetected())
             {
-                stateMachine.ChangeState(enemy.attackState);
+                if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
+                {
+                    if (CanAttack())
+                    {
+                        stateMachine.ChangeState(enemy.attackState);
+                    }
+
+                }
             }
+            
 
             if(player.position.x > enemy.transform.position.x)
             {
@@ -47,6 +55,17 @@ namespace LF
             }
 
             enemy.SetVelocity(enemy.moveSpeed * moveDir, rb.velocity.y);
+        }
+
+        private bool CanAttack()
+        {
+            if(Time.time >= enemy.lastTimeAttacked + enemy.attackCooldown)
+            {
+                enemy.lastTimeAttacked = Time.time;
+                return true;
+            }
+            Debug.Log("Attack is now Cooldown");
+            return false;
         }
     }
 }

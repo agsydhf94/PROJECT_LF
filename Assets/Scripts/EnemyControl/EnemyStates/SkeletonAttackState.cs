@@ -21,6 +21,8 @@ namespace LF
         public override void Exit()
         {
             base.Exit();
+
+            enemy.lastTimeAttacked = Time.time;
         }
 
         public override void Update()

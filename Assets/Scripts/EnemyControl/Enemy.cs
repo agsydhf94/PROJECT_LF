@@ -14,6 +14,8 @@ namespace LF
 
         [Header("Attack Information")]
         public float attackDistance;
+        public float attackCooldown;
+        [HideInInspector] public float lastTimeAttacked;
 
         public EnemyStateMachine stateMachine { get; private set; }
 
