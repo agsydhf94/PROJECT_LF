@@ -4,13 +4,10 @@ using UnityEngine;
 
 namespace LF
 {
-    public class SkeletonMoveState : EnemyState
+    public class SkeletonMoveState : SkeletonGroundedState
     {
-        private EnemySkeleton enemy;
-
-        public SkeletonMoveState(Enemy enemyBase, EnemyStateMachine stateMachine, string animationBoolName, EnemySkeleton enemy) : base(enemyBase, stateMachine, animationBoolName)
+        public SkeletonMoveState(Enemy enemyBase, EnemyStateMachine stateMachine, string animationBoolName, EnemySkeleton enemy) : base(enemyBase, stateMachine, animationBoolName, enemy)
         {
-            this.enemy = enemy;
         }
 
         public override void Enter()
@@ -27,7 +24,7 @@ namespace LF
         {
             base.Update();
 
-            enemy.SetVelocity(enemy.moveSpeed * enemy.facingDirection, enemy.rb.velocity.y);
+            enemy.SetVelocity(enemy.moveSpeed * enemy.facingDirection, rb.velocity.y);
             if(enemy.IsWallDetected() || !enemy.IsGroundDetected())
             {
                 enemy.Flip();

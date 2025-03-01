@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace LF
 {
-    public class SkeletonIdleStste : SkeletonGroundedState
+    public class SkeletonGroundedState : EnemyState
     {
+        protected EnemySkeleton enemy;
 
-        public SkeletonIdleStste(Enemy enemyBase, EnemyStateMachine stateMachine, string animationBoolName, EnemySkeleton enemy) : base(enemyBase, stateMachine, animationBoolName, enemy)
+        public SkeletonGroundedState(Enemy enemyBase, EnemyStateMachine stateMachine, string animationBoolName, EnemySkeleton enemy) : base(enemyBase, stateMachine, animationBoolName)
         {
             this.enemy = enemy;
         }
@@ -15,8 +16,6 @@ namespace LF
         public override void Enter()
         {
             base.Enter();
-
-            stateTimer = enemy.idleTime;
         }
 
         public override void Exit()
@@ -28,9 +27,9 @@ namespace LF
         {
             base.Update();
 
-            if(stateTimer < 0f)
+            if(enemy.IsPlayerDetected())
             {
-                stateMachine.ChangeState(enemy.moveState);
+                stateMachine.ChangeState(enemy.battleState);
             }
         }
     }

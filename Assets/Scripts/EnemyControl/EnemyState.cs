@@ -8,6 +8,7 @@ namespace LF
     {
         protected EnemyStateMachine stateMachine;
         protected Enemy enemyBase;
+        protected Rigidbody2D rb;
 
         private string animationBoolName;
         protected bool triggerCalled;
@@ -23,6 +24,7 @@ namespace LF
         public virtual void Enter()
         {
             triggerCalled = false;
+            rb = enemyBase.rb;
             enemyBase.anim.SetBool(animationBoolName, true);
         }
 
