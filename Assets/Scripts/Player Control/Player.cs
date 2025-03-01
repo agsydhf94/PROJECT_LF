@@ -9,6 +9,7 @@ namespace LF
     {
         [Header("Attack Details")]
         public Vector2[] attackMovement;
+        
 
         public bool isBusy { get; private set; }
         [Header("Move Information")]
