@@ -7,7 +7,7 @@ namespace LF
     public class EnemySkeleton : Enemy
     {
         #region States
-        public SkeletonIdleStste idleStste { get; private set; }
+        public SkeletonIdleStste idleState { get; private set; }
         public SkeletonMoveState moveState { get; private set; }
         public SkeletonBattleState battleState { get; private set; }
         public SkeletonAttackState attackState { get; private set; }
@@ -17,7 +17,7 @@ namespace LF
         {
             base.Awake();
 
-            idleStste = new SkeletonIdleStste(this, stateMachine, "Idle", this);
+            idleState = new SkeletonIdleStste(this, stateMachine, "Idle", this);
             moveState = new SkeletonMoveState(this, stateMachine, "Move", this);
             battleState = new SkeletonBattleState(this, stateMachine, "Move", this);
             attackState = new SkeletonAttackState(this, stateMachine, "Attack", this);
@@ -26,7 +26,7 @@ namespace LF
         protected override void Start()
         {
             base.Start();
-            stateMachine.Initialize(idleStste);
+            stateMachine.Initialize(idleState);
         }
 
         protected override void Update()

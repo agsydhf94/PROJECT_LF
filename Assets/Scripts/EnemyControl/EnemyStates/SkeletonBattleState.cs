@@ -34,6 +34,8 @@ namespace LF
 
             if (enemy.IsPlayerDetected())
             {
+                stateTimer = enemy.battleTime;
+
                 if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
                 {
                     if (CanAttack())
@@ -41,6 +43,13 @@ namespace LF
                         stateMachine.ChangeState(enemy.attackState);
                     }
 
+                }
+            }
+            else
+            {
+                if(stateTimer < 0 || Vector2.Distance(player.transform.position, enemy.transform.position) > 7f)
+                {
+                    stateMachine.ChangeState(enemy.idleState);
                 }
             }
             

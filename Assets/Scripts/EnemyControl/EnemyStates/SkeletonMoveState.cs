@@ -28,7 +28,7 @@ namespace LF
             if(enemy.IsWallDetected() || !enemy.IsGroundDetected())
             {
                 enemy.Flip();
-                stateMachine.ChangeState(enemy.idleStste);
+                stateMachine.ChangeState(enemy.idleState);
             }
         }
     }

@@ -11,6 +11,7 @@ namespace LF
         [Header("Move Information")]
         public float moveSpeed;
         public float idleTime;
+        public float battleTime;
 
         [Header("Attack Information")]
         public float attackDistance;
