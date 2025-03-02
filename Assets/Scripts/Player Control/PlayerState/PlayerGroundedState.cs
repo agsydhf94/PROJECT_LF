@@ -26,7 +26,12 @@ namespace LF
 
             if(Input.GetKey(KeyCode.Mouse0))
             {
-                stateMachine.ChangeState(player.primaryAttackState);
+                stateMachine.ChangeState(player.primaryAttack);
+            }
+
+            if(Input.GetKey(KeyCode.Q))
+            {
+                stateMachine.ChangeState(player.counterAttack);
             }
 
             if(Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())

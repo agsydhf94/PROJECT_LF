@@ -9,6 +9,7 @@ namespace LF
     {
         [Header("Attack Details")]
         public Vector2[] attackMovement;
+        public float counterAttackDuration;
         
 
         public bool isBusy { get; private set; }
@@ -23,11 +24,6 @@ namespace LF
         [SerializeField] private float dashCoolDown;
         private float dashUsedTimer;
 
-        
-
-        
-
-        
 
         
         #region States
@@ -40,7 +36,8 @@ namespace LF
         public PlayerWallSlideState wallSlideState { get; private set; }
         public PlayerWallJumpState wallJumpState { get; private set; }
         public PlayerDashState dashState { get; private set; }
-        public PlayerPrimaryAttackState primaryAttackState { get; private set; }
+        public PlayerPrimaryAttackState primaryAttack { get; private set; }
+        public PlayerCounterAttackState counterAttack { get; private set; }
 
         #endregion
 
@@ -55,7 +52,8 @@ namespace LF
             wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
             wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
             dashState = new PlayerDashState(this, stateMachine, "Dash");
-            primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
+            primaryAttack = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
+            counterAttack = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
         }
 
         protected override void Start()
