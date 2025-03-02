@@ -16,6 +16,11 @@ namespace LF
         [SerializeField] protected float wallCheckDistance;
         [SerializeField] protected LayerMask groundLayer;
 
+        [Header("Knockback Information")]
+        [SerializeField] protected Vector2 knockbackDirection;
+        [SerializeField] protected float knockbackDuration;
+        protected bool isKnocked;
+
         #region Components
         public Animator anim { get; private set; }
         public Rigidbody2D rb { get; private set; }
@@ -44,19 +49,37 @@ namespace LF
 
         public virtual void Damage()
         {
-            Debug.Log(gameObject.name + "DAMAGED");
             fx.StartCoroutine("FlashFX");
+            StartCoroutine("HitKnockBack");
+        }
+
+        protected virtual IEnumerator HitKnockBack()
+        {
+            isKnocked = true;
+
+            rb.velocity = new Vector2(knockbackDirection.x * -facingDirection, knockbackDirection.y);
+            yield return new WaitForSeconds(knockbackDuration);
+            isKnocked = false;
         }
 
         #region Velocity
         public void SetVelocity(float _xVel, float _yVel)
         {
+            if (isKnocked)
+                return;
+
             rb.velocity = new Vector2(_xVel, _yVel);
             FilpControl(_xVel);
         }
 
 
-        public void SetZeroVelocity() => rb.velocity = Vector2.zero;
+        public void SetZeroVelocity()
+        {
+            if (isKnocked)
+                return;
+
+            rb.velocity = Vector2.zero;
+        }
         #endregion
 
         #region Flip

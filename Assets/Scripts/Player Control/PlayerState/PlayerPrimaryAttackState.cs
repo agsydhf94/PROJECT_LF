@@ -21,6 +21,8 @@ namespace LF
         {
             base.Enter();
 
+            xInput = 0; // 혹시 모를 공격 방향 버그를 방지
+
             // 공격 쿨타임 : Time > 마지막 순간의 시간 + 쿨타임 간격
             if(comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
             {
