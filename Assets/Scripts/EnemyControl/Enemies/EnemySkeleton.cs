@@ -11,6 +11,7 @@ namespace LF
         public SkeletonMoveState moveState { get; private set; }
         public SkeletonBattleState battleState { get; private set; }
         public SkeletonAttackState attackState { get; private set; }
+        public SkeletonStunnedState stunnedState { get; private set; }
         #endregion
 
         protected override void Awake()
@@ -21,6 +22,7 @@ namespace LF
             moveState = new SkeletonMoveState(this, stateMachine, "Move", this);
             battleState = new SkeletonBattleState(this, stateMachine, "Move", this);
             attackState = new SkeletonAttackState(this, stateMachine, "Attack", this);
+            stunnedState = new SkeletonStunnedState(this, stateMachine, "Stunned", this);
         }
 
         protected override void Start()
@@ -32,6 +34,11 @@ namespace LF
         protected override void Update()
         {
             base.Update();
+
+            if(Input.GetKeyDown(KeyCode.U))
+            {
+                stateMachine.ChangeState(stunnedState);
+            }
         }
     }
 }

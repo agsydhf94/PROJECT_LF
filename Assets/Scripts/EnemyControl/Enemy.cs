@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace LF
@@ -7,6 +8,10 @@ namespace LF
     public class Enemy : Entity
     {
         [SerializeField] protected LayerMask whatIsPlayer;
+
+        [Header("Stunned Information")]
+        public float stunnedDuration;
+        public Vector2 stunDirection;
 
         [Header("Move Information")]
         public float moveSpeed;
