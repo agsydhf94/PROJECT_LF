@@ -12,6 +12,8 @@ namespace LF
         [Header("Stunned Information")]
         public float stunnedDuration;
         public Vector2 stunDirection;
+        protected bool canBeStunned;
+        [SerializeField] protected GameObject counterImage;
 
         [Header("Move Information")]
         public float moveSpeed;
@@ -36,6 +38,29 @@ namespace LF
             base.Update();
 
             stateMachine.currentState.Update();
+        }
+
+        public virtual void OpenCounterAttackWinow()
+        {
+            canBeStunned = true;
+            counterImage.SetActive(true);
+        }
+
+        public virtual void CloseCounterAttackWindow()
+        {
+            canBeStunned = false;
+            counterImage.SetActive(false);
+        }
+
+        protected virtual bool CanBeStunned()
+        {
+            if(canBeStunned)
+            {
+                CloseCounterAttackWindow();
+                return true;
+            }
+
+            return false;
         }
 
         public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();

@@ -25,5 +25,9 @@ namespace LF
                 }
             }
         }
+
+        private void OpenCounterWindow() => enemy.OpenCounterAttackWinow();
+        private void CloseCounterWindow() => enemy.CloseCounterAttackWindow();
+
     }
 }
