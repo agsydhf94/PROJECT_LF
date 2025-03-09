@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace HA
+namespace LF
 {
-    public class PlayerManager : singleton<PlayerManager>
+    public class PlayerManager : SingletonBase<PlayerManager>
     {
-
+        public Player player;
     }
 }

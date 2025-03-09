@@ -21,8 +21,7 @@ namespace LF
         public float dashSpeed;
         public float dashDuration;
         public float dashDirection {  get; private set; }
-        [SerializeField] private float dashCoolDown;
-        private float dashUsedTimer;
+
 
 
         
@@ -80,11 +79,9 @@ namespace LF
             if(IsWallDetected()) 
                 return;
 
-            dashUsedTimer -= Time.deltaTime;
 
-            if(Input.GetKeyDown(KeyCode.LeftShift) && dashUsedTimer < 0)
+            if(Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.Instance.dashSkill.CanUseSkill())
             {
-                dashUsedTimer = dashCoolDown;
                 dashDirection = Input.GetAxisRaw("Horizontal");
                 if(dashDirection == 0)
                 {

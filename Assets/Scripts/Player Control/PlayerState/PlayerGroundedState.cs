@@ -46,10 +46,6 @@ namespace LF
                 stateMachine.ChangeState(player.airState);
             }
 
-            if(Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                stateMachine.ChangeState(player.dashState);
-            }
         }
     }
 }

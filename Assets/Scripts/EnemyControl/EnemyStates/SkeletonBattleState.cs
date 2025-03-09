@@ -20,7 +20,7 @@ namespace LF
             base.Enter();
             Debug.Log("Battle");
 
-            player = GameObject.Find("Player").transform;
+            player = PlayerManager.Instance.player.transform;
         }
 
         public override void Exit()
