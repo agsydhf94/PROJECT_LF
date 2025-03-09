@@ -14,6 +14,8 @@ namespace LF
         {
             base.Enter();
 
+            player.skillManager.cloneSkill.CreateClone(player.transform);
+
             stateTimer = player.dashDuration;
         }
 

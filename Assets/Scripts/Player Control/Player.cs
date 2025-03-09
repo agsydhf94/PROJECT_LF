@@ -23,8 +23,8 @@ namespace LF
         public float dashDirection {  get; private set; }
 
 
+        public SkillManager skillManager { get; private set; }
 
-        
         #region States
 
         public PlayerStateMachine stateMachine { get; private set; }
@@ -59,6 +59,7 @@ namespace LF
         {
             base.Start();
 
+            skillManager = SkillManager.Instance;
             stateMachine.Initialize(idleState);
         }
 
